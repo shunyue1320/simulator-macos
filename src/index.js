@@ -1,8 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { useState } from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import App from './App'
+
+import Desktop from './components/Desktop'
+import Login from './components/Login'
+
+export default function App() {
+  const [ logon, setlogon ] = useState(false)
+  return logon ? <Desktop /> : <Login setlogon={setlogon} />
+}
 
 ReactDOM.render(
   <React.StrictMode>
@@ -11,7 +18,3 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
