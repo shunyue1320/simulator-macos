@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import MenuBar from './MenuBar'
 import ControlCenterMenu from './ControlCenterMenu'
+import FaceTime from '../apps/FaceTime'
 
 export default function Desktop() {
   const [ showControlCenter, setShowControlCenter ] = useState(fasle) // 显示控制中心
@@ -49,7 +50,7 @@ export default function Desktop() {
   return (
     <div
       className="w-screen h-screen overflow-hidden bg-center bg-cover"
-      style={{ backgroundImage: 'url(img/wallpaper.jpg)' }}
+      style={{ backgroundImage: 'url(img/ui/wallpaper.jpg)' }}
     >
       <MenuBar
         title={currentTitle}
@@ -58,6 +59,8 @@ export default function Desktop() {
       />
 
       {showControlCenter && <ControlCenterMenu />}
+
+      <FaceTime show={faceTimeShow} setShow={setFaceTimeShow} active={openWindow} z={faceTimeZ} />
 
     </div>
   )
