@@ -3,7 +3,8 @@ import React, { useState } from 'react'
 import MenuBar from './MenuBar'
 import ControlCenterMenu from './ControlCenterMenu'
 import FaceTime from '../apps/FaceTime'
-import Terminal from "../apps/Terminal";
+import Terminal from '../apps/Terminal'
+import Notepad from '../apps/Notepad'
 
 export default function Desktop() {
   const [ showControlCenter, setShowControlCenter ] = useState(fasle) // 显示控制中心
@@ -63,6 +64,7 @@ export default function Desktop() {
 
       <FaceTime show={faceTimeShow} setShow={setFaceTimeShow} active={openWindow} z={faceTimeZ} />
       <Terminal show={cmdShow} setShow={setCmdShow} active={openWindow} z={bioZ} />
+      <Notepad show={bioShow} setShow={setBioShow} active={openWindow} z={bioZ} />
 
     </div>
   )
