@@ -5,6 +5,8 @@ import ControlCenterMenu from './ControlCenterMenu'
 import FaceTime from '../apps/FaceTime'
 import Terminal from '../apps/Terminal'
 import Notepad from '../apps/Notepad'
+import Safari from '../apps/Safari'
+import Dock from './Dock'
 
 export default function Desktop() {
   const [ showControlCenter, setShowControlCenter ] = useState(fasle) // 显示控制中心
@@ -65,7 +67,9 @@ export default function Desktop() {
       <FaceTime show={faceTimeShow} setShow={setFaceTimeShow} active={openWindow} z={faceTimeZ} />
       <Terminal show={cmdShow} setShow={setCmdShow} active={openWindow} z={bioZ} />
       <Notepad show={bioShow} setShow={setBioShow} active={openWindow} z={bioZ} />
-
+      <Safari show={safariShow} setShow={setSafariShow} active={openWindow} z={safariZ} />
+      
+      <Dock openWindow={openWindow} />
     </div>
   )
 }
