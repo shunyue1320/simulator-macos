@@ -39,7 +39,8 @@
     "extends": [
       "react-app",
       "react-app/jest",
-      "plugin:prettier/recommended"
+      "plugin:prettier/recommended",
+      "plugin:react/recommended"
     ],
     "rules": {
       "prettier/prettier": [
@@ -47,7 +48,9 @@
         {
           "trailingComma": "none"
         }
-      ]
+      ],
+      "react/no-unescaped-entities": 0,
+      "react/prop-types": 0
     },
     "ignorePatterns": [
       "node_modules/",
