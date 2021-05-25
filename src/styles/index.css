@@ -1,25 +1,55 @@
+@font-face {
+  font-family: "Avenir Next LT Pro";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Avenir Next LT Pro Regular"), url("./fonts/AvenirNextLTPro-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Avenir Next LT Pro";
+  font-style: italic;
+  font-weight: normal;
+  src: local("Avenir Next LT Pro It"), url("./fonts/AvenirNextLTPro-Italic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Avenir Next LT Pro";
+  font-style: normal;
+  font-weight: bold;
+  src: local("Avenir Next LT Pro Demi"), url("./fonts/AvenirNextLTPro-Demi.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Avenir Next LT Pro";
+  font-style: italic;
+  font-weight: bold;
+  src: local("Avenir Next LT Pro DemiIt"), url("./fonts/AvenirNextLTPro-DemiItalic.woff") format("woff");
+}
+
 * {
   margin: 0;
   padding: 0;
-  font-family: Jost, SFCompactRounded, -apple-system, Roboto, Oxygen, Ubuntu, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-}
-
-.font-mono {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace !important;
 }
 
 html, body {
   height: 100%;
+  overflow: hidden;
 }
 
-.ccm {
-  grid-template-columns: repeat(4, 5rem);
-  grid-template-rows: repeat(5, 5rem);
+body:not(pre) {
+  font-family: "Helvetica Neue", SFCompactRounded, -apple-system, Roboto, Oxygen, Ubuntu, "Fira Sans", "Droid Sans", sans-serif;
+}
+
+.font-avenir {
+  font-family: "Avenir Next LT Pro", "Helvetica Neue", SFCompactRounded, -apple-system, Roboto, Oxygen, Ubuntu, "Fira Sans", "Droid Sans", sans-serif;
+}
+
+.font-terminal {
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
 }
 
 .blur {
-  backdrop-filter: blur(48px);
+  backdrop-filter: blur(40px);
 }
 
 .transition-hw {
@@ -32,22 +62,82 @@ html, body {
   filter: invert();
 }
 
+/* --------- input --------- */
+
+.login input::placeholder {
+  color: white;
+}
+
+.spotlight input::placeholder {
+  color: black;
+  opacity: 0.4;
+}
+
+.dark .spotlight input::placeholder {
+  color: white;
+}
+
+/* --------- spotlight --------- */
+
+.spotlight {
+  width: 660px;
+  margin-left: -330px;
+  left: 50%;
+}
+
+@media (max-width: 639px) {
+  .spotlight {
+    width: 100%;
+    margin-left: 0;
+    left: 0;
+  }
+}
+
+/* --------- app window --------- */
+
 .innner-window {
   height: calc(100% - 1.5rem);
+}
+
+.safari-content {
+  height: calc(100% - 2rem);
+}
+
+.traffic_lights svg {
+  display: none;
+}
+
+.traffic_lights:hover svg {
+  display: block;
+}
+
+/* --------- dock --------- */
+
+.dock ul {
+  height: 65px;
+}
+
+.dock li .tooltip {
+  display: none;
+}
+
+.dock li:hover .tooltip {
+  display: block;
+  box-shadow: hsla(0deg, 0%, 0%, 20%) 0px 1px 5px 2px, 0 0 0 0 white;
 }
 
 /* --------- slider --------- */
 
 .slider .rangeslider {
+  @apply bg-gray-200;
   margin: 0 !important;
   width: 100%;
   height: 2rem;
-  background-color: rgba(0, 0, 0, 0.1);
   border-radius: 9999px;
   box-shadow: none;
 }
 .slider .rangeslider .rangeslider__fill {
-  background-color: #fff;
+  @apply bg-gray-100;
   box-shadow: none;
   border-radius: 0;
 }
@@ -60,4 +150,229 @@ html, body {
 }
 .slider .rangeslider .rangeslider__handle::after {
   display: none;
+}
+
+/* --------- bear markdown --------- */
+
+.bear .markdown a {
+  @apply text-red-500;
+}
+
+.bear .markdown h1,
+.bear .markdown h2,
+.bear .markdown h3,
+.bear .markdown h4 {
+  @apply font-bold relative text-gray-800;
+}
+
+.bear .markdown h1,
+.bear .markdown h2,
+.bear .markdown h3,
+.bear .markdown h4 {
+  @apply mt-7;
+}
+
+.bear .markdown h1::before,
+.bear .markdown h2::before,
+.bear .markdown h3::before,
+.bear .markdown h4::before {
+  @apply absolute text-sm text-gray-400 -left-7 bottom-1;
+}
+
+.bear .markdown h1 {
+  @apply text-3xl;
+}
+
+.bear .markdown h1::before {
+  content: "H1";
+}
+
+.bear .markdown h2 {
+  @apply text-2xl;
+}
+
+.bear .markdown h2::before {
+  content: "H2";
+}
+
+.bear .markdown h3 {
+  @apply text-xl;
+}
+
+.bear .markdown h3::before {
+  content: "H3";
+}
+
+.bear .markdown h3 {
+  @apply text-xl;
+}
+
+.bear .markdown h4 {
+  @apply text-lg;
+}
+
+.bear .markdown h4::before {
+  content: "H4";
+}
+
+.bear .markdown p {
+  @apply mt-6;
+}
+
+.bear .markdown h2 + p,
+.bear .markdown h3 + p,
+.bear .markdown h4 + p {
+  @apply mt-4;
+}
+
+.bear .markdown ul,
+.bear .markdown ol {
+  @apply mt-2 pl-5;
+}
+
+.bear .markdown ul {
+  @apply list-disc;
+}
+
+.bear .markdown ul > li::marker {
+  @apply text-red-500;
+}
+
+.bear .markdown ol {
+  @apply list-decimal;
+}
+
+.bear .markdown li p {
+  @apply m-0 mb-2;
+}
+
+.bear .markdown code {
+  @apply text-sm border border-gray-300 rounded py-0.5 px-1 bg-gray-50;
+}
+
+.bear .markdown pre {
+  @apply mt-2 text-sm;
+}
+
+.bear .markdown pre code {
+  @apply text-sm;
+}
+
+.dark .bear .markdown pre code {
+  font-size: 14px !important;
+}
+
+.bear .markdown pre div {
+  @apply border border-gray-300 rounded;
+}
+
+.bear .markdown pre code,
+.dark .bear .markdown pre code {
+  @apply text-base bg-transparent border-none p-0;
+}
+
+.bear .markdown .token {
+	background: transparent !important;
+}
+
+.bear .markdown img {
+  @apply inline-block;
+}
+
+.bear .markdown table {
+  @apply mt-4 block w-full overflow-auto;
+}
+
+.bear .markdown table td,
+.bear .markdown table th {
+  @apply px-3 py-2 border border-gray-300;
+}
+
+.bear .markdown table tr {
+  @apply border-t border-gray-300 bg-transparent;
+}
+
+.dark .bear .markdown,
+.dark .bear .midbar {
+  @apply bg-gray-800;
+}
+
+.dark .bear .midbar li.bg-white {
+  @apply bg-gray-900;
+}
+
+.dark .bear .midbar li:hover {
+  @apply bg-gray-900;
+}
+
+.dark .bear .sidebar {
+  @apply bg-gray-700 text-white;
+}
+
+
+/*
+  Credits: W3 Schools: https://www.w3schools.com/howto/howto_css_switch.asp
+*/
+
+/* The switch - the box around the slider */
+.switch-toggle {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 17px;
+}
+
+/* Hide default HTML checkbox */
+.switch-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider-toggle {
+  @apply bg-gray-300;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider-toggle:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider-toggle {
+  background-color: #2196F3;
+}
+
+input:focus + .slider-toggle {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider-toggle:before {
+  -webkit-transform: translateX(13px);
+  -ms-transform: translateX(13px);
+  transform: translateX(13px);
+}
+
+/* Rounded sliders */
+.slider-toggle.round {
+  border-radius: 17px;
+}
+
+.slider-toggle.round:before {
+  border-radius: 50%;
 }
