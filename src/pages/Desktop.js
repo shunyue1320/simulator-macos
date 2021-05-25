@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import nightwind from "nightwind/helper"
 
-import MenuBar from "./MenuBar";
-import ControlCenterMenu from "./ControlCenterMenu";
+import MenuBar from "../components/menus/MenuBar";
+import ControlCenterMenu from "../components/ControlCenterMenu";
 import FaceTime from "../apps/FaceTime";
 import Terminal from "../apps/Terminal";
 import Notepad from "../apps/Notepad";
 import Safari from "../apps/Safari";
-import Dock from "./Dock";
+import Dock from "../components/Dock";
 
 export default function Desktop() {
   const [showControlCenter, setShowControlCenter] = useState(false); // 显示控制中心
