@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
-import Window from '../components/Window'
+import React, { useState } from "react";
+import Window from "../components/Window";
 
 function SafariContent() {
-  const [ goURL, setGoURL ] = useState('https://renovamen.ink')
-  const [ currentURL, setCourrentURL ] = useState('https://renovamen.ink')
+  const [goURL, setGoURL] = useState("https://renovamen.ink");
+  const [currentURL, setCurrentURL] = useState("https://renovamen.ink");
 
-  const setURL = e => {
-    const keyCode = e.which || e.keyCode
-    if (keyCode == 13) {
-      setGoURL(e.target.value)
+  const setURL = (e) => {
+    const keyCode = e.which || e.keyCode;
+    if (keyCode === 13) {
+      setGoURL(e.target.value);
     }
-  }
+  };
 
   return (
     <div className="w-full h-full">
@@ -31,13 +31,13 @@ function SafariContent() {
         className="h-full w-full"
       />
     </div>
-  )
+  );
 }
 
 export default function Safari({ show, setShow, active, z }) {
-  const [ safariMax, setSafariMax ] = useState(false)
+  const [safariMax, setSafariMax] = useState(false);
   return (
-    <Window 
+    <Window
       content={<SafariContent />}
       title="Safari"
       show={show}
@@ -48,5 +48,5 @@ export default function Safari({ show, setShow, active, z }) {
       z={z}
       size={"h-3/4 w-3/5"}
     />
-  )
+  );
 }

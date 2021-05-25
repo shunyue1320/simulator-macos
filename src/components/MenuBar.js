@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import format from 'date-fns/format'
+import React, { useEffect, useState } from "react";
+import format from "date-fns/format";
 
 function MenuItem({ children }) {
   return (
     <div className="inline-flex flex-row space-x-1 hover:bg-white hover:bg-opacity-50 rounded p-1">
       {children}
     </div>
-  )
+  );
 }
 
 export default function MenuBar({
@@ -14,11 +14,11 @@ export default function MenuBar({
   showControlCenter,
   setShowControlCenter
 }) {
-  const [ date, setDate ] = useState(new Date())
+  const [date, setDate] = useState(new Date());
   useEffect(() => {
-    let timer = setTimeout(() => setDate(new Date(), 60 * 1000))
-    return () => clearTimeout(timer)
-   }, [date])
+    let timer = setTimeout(() => setDate(new Date(), 60 * 1000));
+    return () => clearTimeout(timer);
+  }, [date]);
 
   return (
     <div className="w-full h-6 px-4 fixed top-0 flex flex-row justify-between items-center text-sm text-white bg-indigo-700 bg-opacity-10 blur shadow transition">
@@ -57,6 +57,5 @@ export default function MenuBar({
         <span>{format(date, "eee d MMM h:mm aa")}</span>
       </div>
     </div>
-  )
+  );
 }
-
