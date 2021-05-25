@@ -17,7 +17,7 @@
   },
   "lint-staged": {
     "*.{js}": [
-      "eslint --fix --ext .js ./"
+      "eslint './src/**/*.{js,jsx}' --fix"
     ],
     "package.json": [
       "sort-package-json"
