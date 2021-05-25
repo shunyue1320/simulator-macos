@@ -16,11 +16,23 @@
     }
   },
   "lint-staged": {
-    "*.{js}": [
+    "*.{js,jsx}": [
       "eslint './src/**/*.{js,jsx}' --fix"
     ],
     "package.json": [
       "sort-package-json"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
     ]
   },
   "eslintConfig": {
@@ -43,18 +55,6 @@
       "dist/"
     ]
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -73,7 +73,7 @@
     "eslint-loader": "^4.0.2",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.23.2",
-    "husky": "^6.0.0",
+    "husky": "4.3.8",
     "lint-staged": "^11.0.0",
     "prettier": "^2.3.0",
     "sort-package-json": "^1.49.0",
