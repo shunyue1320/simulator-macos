@@ -66,7 +66,7 @@ class Desktop extends Component {
           filter: `brightness( ${this.props.brightness * 0.7 + 50}% )`
         }}
       >
-        {/* Dark Model Toggler */}
+        {/* 夜晚模式切换器 */}
         <script dangerouslySetInnerHTML={{ __html: nightwind.init() }} />
       </div>
     );
