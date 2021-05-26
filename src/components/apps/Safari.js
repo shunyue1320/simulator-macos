@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Window from "../components/Window";
+import Window from "../Window";
 
 function SafariContent() {
   const [goURL, setGoURL] = useState("https://renovamen.ink");

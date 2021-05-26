@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import Webcam from "react-webcam";
-import Window from "./components/Window";
+import Window from "../Window";
 
 const videoConstraints = {
   facingMode: "user"
