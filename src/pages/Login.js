@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { CgSleep } from "react-icons/cg";
 import { BsFillLockFill, BsUnlockFill } from "react-icons/bs";
 import { RiMoonFill, RiShutDownLine, RiRestartLine } from "react-icons/ri";
 import wallpapers from "../configs/wallpapers";
@@ -11,16 +10,16 @@ class Login extends Component {
     super(props);
     this.state = {
       error: false,
-      password: null,
-      correctPassword: 123
+      password: "",
+      correctPassword: "123"
     };
   }
 
   keyPress = (e) => {
     const keyCode = e.which || e.keyCode;
     if (keyCode === 13) {
-      if (this.state.password == 123) {
-        this.props.setLogin(true);
+      if (this.state.password === this.state.correctPassword) {
+        this.props.setStateMac("desktop");
       } else {
         this.setState({ error: true });
       }
@@ -60,7 +59,7 @@ class Login extends Component {
               }
             />
             <div className="col-start-5 col-span-1 flex justify-center items-center">
-              {this.state.password == this.state.correctPassword ? (
+              {this.state.password === this.state.correctPassword ? (
                 <BsUnlockFill color="white" />
               ) : (
                 <BsFillLockFill color="white" />
@@ -82,7 +81,7 @@ class Login extends Component {
         <div className="nightwind-prevent-block text-sm fixed bottom-16 left-0 right-0 mx-auto flex flex-row space-x-4 w-max">
           <div
             className="flex flex-col items-center text-white w-24"
-            onClick={this.props.sleepMac}
+            onClick={() => this.props.setStateMac("sleep")}
           >
             <div className="h-10 w-10 rounded-full inline-flex justify-center items-center">
               <RiMoonFill size={40} />
@@ -91,7 +90,7 @@ class Login extends Component {
           </div>
           <div
             className="flex flex-col items-center text-white w-24"
-            onClick={this.props.restartMac}
+            onClick={() => this.props.setStateMac("restart")}
           >
             <div className="h-10 w-10 rounded-full inline-flex justify-center items-center">
               <RiRestartLine size={36} />
@@ -100,7 +99,7 @@ class Login extends Component {
           </div>
           <div
             className="flex flex-col items-center text-white w-24"
-            onClick={this.props.shutMac}
+            onClick={() => this.props.setStateMac("shutDown")}
           >
             <div className="h-10 w-10 rounded-full inline-flex justify-center items-center">
               <RiShutDownLine size={36} />

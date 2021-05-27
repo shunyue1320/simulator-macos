@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
+import _, { set } from "lodash";
 import "./styles/index.css";
 import "./styles/index.tailwind.css";
 import { Provider } from "react-redux";
@@ -7,57 +8,18 @@ import store from "./redux/store";
 
 import Desktop from "./pages/Desktop";
 import Login from "./pages/Login";
+import Boot from "./pages/Boot";
 
 export default function App() {
-  const [login, setLogin] = useState(false);
-  const [booting, setBooting] = useState(false);
-  const [restart, setRestart] = useState(false);
-  const [sleep, setSleep] = useState(false);
+  // stateMac = 'desktop' | 'login' | 'sleep' | 'restart' | 'shutDown'
+  const [stateMac, setStateMac] = useState("login");
 
-  const shutMac = (e) => {
-    e.stopPropagation();
-    setRestart(false);
-    setSleep(false);
-    setLogin(false);
-    setBooting(true);
-  };
-
-  const restartMac = (e) => {
-    e.stopPropagation();
-    setRestart(true);
-    setSleep(false);
-    setLogin(false);
-    setBooting(true);
-  };
-
-  const sleepMac = (e) => {
-    e.stopPropagation();
-    setRestart(false);
-    setSleep(true);
-    setLogin(false);
-    setBooting(true);
-  };
-
-  if (booting) {
-    return <div />;
-  } else if (login) {
-    return (
-      <Desktop
-        setLogin={setLogin}
-        shutMac={shutMac}
-        sleepMac={sleepMac}
-        restartMac={restartMac}
-      />
-    );
-  } else {
-    return (
-      <Login
-        setLogin={setLogin}
-        shutMac={shutMac}
-        sleepMac={sleepMac}
-        restartMac={restartMac}
-      />
-    );
+  if (_.includes(["sleep", "restart", "shutDown"], stateMac)) {
+    return <Boot stateMac={stateMac} setStateMac={setStateMac} />;
+  } else if (stateMac === "desktop") {
+    return <Desktop setStateMac={setStateMac} />;
+  } else if (stateMac === "login") {
+    return <Login setStateMac={setStateMac} />;
   }
 }
 
