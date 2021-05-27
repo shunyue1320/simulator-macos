@@ -29,7 +29,7 @@ class Login extends Component {
   render() {
     return (
       <div
-        className="w-full h-full login text-center"
+        className="w-full h-full login text-center select-none"
         style={{
           background: `url(${
             this.props.dark ? wallpapers.night : wallpapers.day

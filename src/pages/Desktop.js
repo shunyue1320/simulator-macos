@@ -4,6 +4,7 @@ import nightwind from "nightwind/helper";
 
 import apps from "../configs/apps";
 import wallpapers from "../configs/wallpapers";
+import Menus from "../components/menus";
 
 class Desktop extends Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class Desktop extends Component {
       appsZ: {},
       maxZ: 2,
       showLaunchpad: false,
-      currentTitle: "Finder",
+      currentTitle: "",
       hideDock: false,
       spotlight: false,
       spotlightBtnRef: null
@@ -58,7 +59,7 @@ class Desktop extends Component {
   render() {
     return (
       <div
-        className="w-full h-full overflow-hidden bg-center bg-cover"
+        className="w-full h-full overflow-hidden bg-center bg-cover select-none"
         style={{
           backgroundImage: `url(${
             this.props.dark ? wallpapers.night : wallpapers.day
@@ -68,6 +69,18 @@ class Desktop extends Component {
       >
         {/* 夜晚模式切换器 */}
         <script dangerouslySetInnerHTML={{ __html: nightwind.init() }} />
+
+        {/* 顶部状态栏 */}
+        <Menus
+          title={this.state.currentTitle}
+          setStateMac={this.props.setStateMac}
+          toggleSpotlight={this.toggleSpotlight}
+          setSpotlightBtnRef={(value) => {
+            this.setState({
+              spotlightBtnRef: value
+            });
+          }}
+        />
       </div>
     );
   }
