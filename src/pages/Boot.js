@@ -36,7 +36,7 @@ export default function Boot({ stateMac, setStateMac }) {
 
   return (
     <div
-      className="nightwind-prevent nightwind-prevent-block w-full h-full bg-black flex flex-col justify-center items-center"
+      className="nightwind-prevent nightwind-prevent-block w-full h-full bg-black flex flex-col justify-center items-center select-none"
       onClick={handleClick}
     >
       {stateMac !== "shutDown" && (

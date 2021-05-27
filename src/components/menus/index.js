@@ -6,7 +6,12 @@ import AppleMenu from "./AppleMenu";
 import { enterFullScreen, isFullScreen } from "../../utils/screen";
 import { toggleFullScreen } from "../../redux/action";
 
-import { BsBatteryFull } from "react-icons/bs";
+import {
+  BsBatteryCharging,
+  BsBatteryFull,
+  BsBatteryHalf,
+  BsBattery
+} from "react-icons/bs";
 import { BiSearch } from "react-icons/bi";
 import { FaWifi } from "react-icons/fa";
 import { AiFillApple } from "react-icons/ai";
@@ -33,16 +38,16 @@ class TopBar extends Component {
     super(props);
     this.state = {
       data: new Date(),
-      showControlCenter: false,
-      showWifiMenu: false,
-      showAppleMenu: false,
+      battery: 0,
+      charging: false,
+      showMenu: "", // apple | wifi | search | controlCenter
       playing: false
     };
     this.intervalId = null;
     this.appleBtnRef = createRef();
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.props.setSpotlightBtnRef(this.setSpotlightBtnRef);
 
     this.intervalId = setInterval(() => {
@@ -51,32 +56,57 @@ class TopBar extends Component {
       });
     }, 60 * 1000);
 
-    window.addEventListener("resize", this.resize);
-    enterFullScreen();
-  }
-  componentWillUnmount() {
-    clearInterval(this.intervalId);
-    window.removeEventListener("resize", this.resize);
+    this.getBattery();
+    this.props.toggleFullScreen(true);
   }
 
-  resize = () => {
-    const isFull = isFullScreen();
-    this.props.toggleFullScreen(isFull);
-  };
-  toggleAppleMenu = (value) => {
-    this.setState({
-      showAppleMenu: value
+  componentWillUnmount() {
+    clearInterval(this.intervalId);
+  }
+
+  getBattery = () => {
+    navigator.getBattery().then((res) => {
+      this.setState({
+        charging: res.charging,
+        battery: parseInt(res.level * 100)
+      });
+
+      res.onchargingchange = (e) => {
+        this.setState({
+          charging: e.currentTarget.charging
+        });
+      };
+      res.onlevelchange = (e) => {
+        this.setState({
+          battery: parseInt(e.currentTarget.level * 100)
+        });
+      };
     });
+  };
+  toggleMenu = (value) => {
+    this.setState({
+      showMenu: value
+    });
+  };
+  todoToggleMenu = (e, value) => {
+    e.stopPropagation();
+    this.toggleMenu(this.state.showMenu === value ? false : value);
   };
 
   render() {
     return (
-      <div className="nightwind-prevent w-full h-6 px-4 fixed top-0 flex flex-row justify-between items-center text-sm text-white bg-gray-500 bg-opacity-10 blur shadow transition">
-        <div className="flex flex-row items-center space-x-4">
+      <div
+        className="nightwind-prevent w-full h-6 px-4 fixed top-0 flex flex-row justify-between items-center text-sm text-white bg-gray-500 bg-opacity-10 blur shadow transition"
+        onDoubleClick={() => this.props.toggleFullScreen(!isFullScreen())}
+      >
+        <div
+          className="flex flex-row items-center space-x-4"
+          onDoubleClick={(e) => e.stopPropagation()}
+        >
           {/* 苹果logo */}
           <TopBarItem
-            forceHover={this.state.showAppleMenu}
-            onClick={() => this.toggleAppleMenu(true)}
+            forceHover={this.state.showMenu === "apple"}
+            onClick={(e) => this.todoToggleMenu(e, "apple")}
             ref={this.appleBtnRef}
           >
             <AiFillApple size={18} />
@@ -87,13 +117,28 @@ class TopBar extends Component {
         </div>
 
         {/* Apple菜单设置 */}
-        {this.state.showAppleMenu && (
+        {this.state.showMenu === "apple" && (
           <AppleMenu
             setStateMac={this.props.setStateMac}
-            toggleAppleMenu={this.toggleAppleMenu}
+            toggleMenu={this.toggleMenu}
             btnRef={this.appleBtnRef}
           />
         )}
+
+        <div className="flex flex-row justify-end items-center space-x-2">
+          <TopBarItem hideOnMobile={true}>
+            <span className="text-xs mt-0.5 mr-1">{this.state.battery}%</span>
+            {this.state.charging ? (
+              <BsBatteryCharging size={20} />
+            ) : this.state.battery === 100 ? (
+              <BsBatteryFull size={20} />
+            ) : this.state.battery === 0 ? (
+              <BsBattery size={20} />
+            ) : (
+              <BsBatteryHalf size={20} />
+            )}
+          </TopBarItem>
+        </div>
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { MenuItem, MenuItemGroup } from "./base";
 
-export default function AppleMenu({ setStateMac, toggleAppleMenu, btnRef }) {
+export default function AppleMenu({ setStateMac, toggleMenu, btnRef }) {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -11,12 +11,12 @@ export default function AppleMenu({ setStateMac, toggleAppleMenu, btnRef }) {
         !ref.current.contains(e.target) &&
         !btnRef.current.contains(e.target)
       ) {
-        toggleAppleMenu(false);
+        toggleMenu(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [ref, toggleAppleMenu, btnRef]);
+  }, [ref, toggleMenu, btnRef]);
 
   return (
     <div
