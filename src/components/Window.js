@@ -1,31 +1,44 @@
 import React, { Component } from "react";
 import { Rnd } from "react-rnd";
+import { IoCloseOutline } from "react-icons/io5";
+import { FiMinus, FiMaximize2, FiMinimize2 } from "react-icons/fi";
 
-class TrafficLights extends Component {
-  closeWindow = (e) => {
+const TrafficLights = ({ id, close, max, setMax, setMin }) => {
+  const closeWindow = (e) => {
     e.stopPropagation();
-    this.props.setShow(false);
+    close(id);
   };
+  return (
+    <div className="traffic_lights flex flex-row absolute left-0 space-x-2 pl-2 mt-1.5">
+      <button
+        className="w-3 h-3 rounded-full bg-red-500 outline-none focus:outline-none inline-flex justify-center items-center"
+        onClick={closeWindow}
+        onTouchEnd={closeWindow}
+      >
+        <IoCloseOutline size={11} />
+      </button>
 
-  render() {
-    return (
-      <div className="flex flex-row absolute left-0 space-x-2 pl-2 mt-1.5">
-        <button
-          className="w-3 h-3 rounded-full bg-red-500 outline-none focus:outline-none"
-          onClick={this.closeWindow}
-        />
-        <button
-          className="w-3 h-3 rounded-full bg-yellow-500 outline-none focus:outline-none"
-          onClick={() => this.props.setMax(false)}
-        />
-        <button
-          className="w-3 h-3 rounded-full bg-green-500 outline-none focus:outline-none"
-          onClick={() => this.props.setMax(!this.props.max)}
-        />
-      </div>
-    );
-  }
-}
+      <button
+        className={`w-3 h-3 rounded-full ${
+          max ? "bg-gray-400" : "bg-yellow-500"
+        } outline-none focus:outline-none inline-flex justify-center items-center`}
+        onClick={() => setMin(id)}
+        onTouchEnd={() => setMin(id)}
+        disabled={max ? 1 : 0}
+      >
+        <FiMinus size={10} className={max ? "invisible" : ""} />
+      </button>
+
+      <button
+        className="w-3 h-3 rounded-full bg-green-500 outline-none focus:outline-none  inline-flex justify-center items-center"
+        onClick={() => setMax(id)}
+        onTouchEnd={() => setMax(id)}
+      >
+        {max ? <FiMinimize2 size={10} /> : <FiMaximize2 size={10} />}
+      </button>
+    </div>
+  );
+};
 
 export default class Window extends Component {
   constructor(props) {
@@ -67,21 +80,43 @@ export default class Window extends Component {
   };
 
   render() {
+    const minMarginY = 24;
+    const minMarginX = 100;
     const round = this.props.max ? "rounded-none" : "rounded-lg";
-    if (!this.props.show) {
-      return <div />;
-    }
+    const minimized = this.props.min
+      ? "opacity-0 invisible transition-opacity duration-300"
+      : "";
+    const border = this.props.max
+      ? ""
+      : "border border-gray-500 border-opacity-30";
+    const width = this.props.max ? this.state.maxW : this.state.width;
+    const height = this.props.max ? this.state.maxH : this.state.height;
+    const minWidth = this.props.minWidth ?? 200;
+    const minHeight = this.props.minHeight ?? 200;
+    const position = {
+      x: this.props.max
+        ? 0
+        : Math.min(
+            window.innerWidth - minMarginX,
+            Math.max(-this.state.width + minMarginX, this.state.x)
+          ),
+      y: this.props.max
+        ? 0
+        : Math.min(
+            window.innerHeight - minMarginY,
+            Math.max(minMarginY, this.state.y)
+          )
+    };
+
+    let children = React.cloneElement(this.props.children, { width });
 
     return (
       <Rnd
-        size={{
-          width: this.props.max ? this.state.maxW : this.state.width,
-          height: this.props.max ? this.state.maxH : this.state.height
-        }}
-        position={{
-          x: this.props.max ? 0 : this.state.x,
-          y: this.props.max ? 0 : this.state.y
-        }}
+        id={`window-${this.props.id}`}
+        size={{ width, height }}
+        minWidth={minWidth}
+        minHeight={minHeight}
+        position={position}
         onDragStop={(e, position) => {
           this.setState({
             x: position.x,
@@ -90,33 +125,34 @@ export default class Window extends Component {
         }}
         onResizeStop={(e, direction, ref, delta, position) => {
           this.setState({
-            width: ref.style.width,
-            height: ref.style.height,
+            width: parseInt(ref.style.width),
+            height: parseInt(ref.style.height),
             ...position
           });
         }}
+        dragHandleClassName="window-drag"
         disableDragging={this.props.max}
         style={{ zIndex: this.props.z }}
-        onMouseDown={() => this.props.active(this.props.title)}
-        className={`absolute transition-hw ${round} overflow-hidden bg-white w-full h-full shadow-md`}
+        onMouseDown={() => this.props.focus(this.props.id)}
+        className={`absolute ${round} overflow-hidden bg-transparent w-full h-full ${border} shadow-md ${minimized}`}
       >
         <div
-          className="relative h-6 text-center bg-gray-300"
-          onDoubleClick={() => this.props.setMax(!this.props.max)}
+          className="window-drag relative h-6 text-center bg-gray-300"
+          onDoubleClick={() => this.props.setMax(this.props.id)}
         >
           <TrafficLights
-            setShow={this.props.setShow}
+            id={this.props.id}
+            close={this.props.close}
             max={this.props.max}
             setMax={this.props.setMax}
+            setMin={this.props.setMin}
           />
           <span className="font-semibold text-gray-700">
             {this.props.title}
           </span>
         </div>
 
-        <div className="innner-window w-full overflow-y-hidden">
-          {this.props.content}
-        </div>
+        <div className="innner-window w-full overflow-y-hidden">{children}</div>
       </Rnd>
     );
   }

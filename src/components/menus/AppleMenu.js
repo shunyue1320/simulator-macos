@@ -16,6 +16,7 @@ export default function AppleMenu({ setStateMac, toggleMenu }) {
     <div
       className="fixed top-6 left-4 w-56 bg-gray-200 bg-opacity-90 blur rounded-b-lg shadow-2xl"
       ref={ref}
+      style={{ zIndex: 100000 }}
     >
       <MenuItemGroup>
         <MenuItem>About This Mac</MenuItem>

@@ -93,7 +93,7 @@ class TopBar extends Component {
     });
   };
   todoToggleMenu = (e, value) => {
-    e.stopPropagation();
+    // e.stopPropagation();
     this.toggleMenu(this.state.showMenu === value ? false : value);
   };
   toggleAudio = (target) => {
@@ -114,13 +114,17 @@ class TopBar extends Component {
       title,
       battery,
       charging,
-      wifi
+      wifi,
+      z,
+      setMaxZ
     } = this.props;
     const { showMenu, playing, date } = this.state;
     return (
       <div
         className="nightwind-prevent w-full h-6 px-4 fixed top-0 flex flex-row justify-between items-center text-sm text-white bg-gray-500 bg-opacity-10 blur shadow transition"
+        onClick={setMaxZ}
         onDoubleClick={() => toggleFullScreen(!isFullScreen())}
+        style={{ zIndex: z }}
       >
         <div
           className="flex flex-row items-center"
