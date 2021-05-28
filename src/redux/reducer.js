@@ -7,7 +7,9 @@ const initState = {
   wifi: true,
   bluetooth: true,
   airdrop: true,
-  fullscreen: false
+  fullscreen: false,
+  battery: 0,
+  charging: false
 };
 
 export const Reducer = (state = initState, action = {}) => {
@@ -46,6 +48,13 @@ export const Reducer = (state = initState, action = {}) => {
       return {
         ...state,
         airdrop: action.airdrop
+      };
+
+    case type.TOGGLE_BATTERY:
+      return {
+        ...state,
+        battery: action.content.battery,
+        charging: action.content.charging
       };
     default:
       return state;

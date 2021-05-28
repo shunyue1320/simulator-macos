@@ -17,7 +17,7 @@ class Desktop extends Component {
       appsZ: {},
       maxZ: 2,
       showLaunchpad: false,
-      currentTitle: "",
+      currentTitle: "macOs",
       hideDock: false,
       spotlight: false,
       spotlightBtnRef: null
