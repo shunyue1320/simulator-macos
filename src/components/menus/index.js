@@ -45,7 +45,7 @@ class TopBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: new Date(),
+      date: new Date(),
       showMenu: "", // apple | wifi | search | controlCenter
       playing: false
     };
@@ -116,7 +116,7 @@ class TopBar extends Component {
       charging,
       wifi
     } = this.props;
-    const { showMenu } = this.state;
+    const { showMenu, playing, date } = this.state;
     return (
       <div
         className="nightwind-prevent w-full h-6 px-4 fixed top-0 flex flex-row justify-between items-center text-sm text-white bg-gray-500 bg-opacity-10 blur shadow transition"
@@ -188,7 +188,7 @@ class TopBar extends Component {
           {showMenu === "controlCenter" && (
             <ControlCenterMenu
               audio={this.audio}
-              playing={this.state.playing}
+              playing={playing}
               toggleAudio={this.toggleAudio}
               setVolume={this.setVolume}
               setBrightness={(value) => {
@@ -197,6 +197,9 @@ class TopBar extends Component {
               toggleMenu={this.toggleMenu}
             />
           )}
+
+          <span>{format(date, "eee MMM d")}</span>
+          <span>{format(date, "h:mm aa")}</span>
         </div>
       </div>
     );
