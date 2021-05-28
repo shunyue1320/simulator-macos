@@ -5,6 +5,7 @@ import nightwind from "nightwind/helper";
 import apps from "../configs/apps";
 import wallpapers from "../configs/wallpapers";
 import Menus from "../components/menus";
+import Spotlight from "../components/Spotlight";
 
 class Desktop extends Component {
   constructor(props) {
@@ -57,14 +58,14 @@ class Desktop extends Component {
   };
 
   render() {
+    const { dark, brightness, setStateMac } = this.props;
+    const { currentTitle, spotlight } = this.state;
     return (
       <div
         className="w-full h-full overflow-hidden bg-center bg-cover select-none"
         style={{
-          backgroundImage: `url(${
-            this.props.dark ? wallpapers.night : wallpapers.day
-          })`,
-          filter: `brightness( ${this.props.brightness * 0.7 + 50}% )`
+          backgroundImage: `url(${dark ? wallpapers.night : wallpapers.day})`,
+          filter: `brightness( ${brightness * 0.7 + 50}% )`
         }}
       >
         {/* 夜晚模式切换器 */}
@@ -72,15 +73,24 @@ class Desktop extends Component {
 
         {/* 顶部状态栏 */}
         <Menus
-          title={this.state.currentTitle}
-          setStateMac={this.props.setStateMac}
-          toggleSpotlight={this.toggleSpotlight}
+          title={currentTitle}
+          setStateMac={setStateMac}
+          toggleSpotlight={() => this.setState({ spotlight: !spotlight })}
           setSpotlightBtnRef={(value) => {
             this.setState({
               spotlightBtnRef: value
             });
           }}
         />
+
+        {/* 搜索弹窗 */}
+        {spotlight && (
+          <Spotlight
+            openApp={this.openApp}
+            toggleLaunchpad={this.toggleLaunchpad}
+            toggleSpotlight={() => this.setState({ spotlight: !spotlight })}
+          />
+        )}
       </div>
     );
   }

@@ -110,6 +110,7 @@ class TopBar extends Component {
       toggleFullScreen,
       setStateMac,
       setBrightness,
+      toggleSpotlight,
       title,
       battery,
       charging,
@@ -171,6 +172,11 @@ class TopBar extends Component {
           </TopBarItem>
           {/* wifi弹框 */}
           {showMenu === "wifi" && <WifiMenu toggleMenu={this.toggleMenu} />}
+
+          {/* 搜索 */}
+          <TopBarItem onClick={toggleSpotlight}>
+            <BiSearch size={17} />
+          </TopBarItem>
 
           <TopBarItem
             hideOnMobile={true}
