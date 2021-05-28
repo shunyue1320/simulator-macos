@@ -7,6 +7,7 @@ import wallpapers from "../configs/wallpapers";
 import Menus from "../components/menus";
 import Spotlight from "../components/Spotlight";
 import Launchpad from "../components/Launchpad";
+import Dock from "../components/dock/Dock";
 
 class Desktop extends Component {
   constructor(props) {
@@ -69,6 +70,39 @@ class Desktop extends Component {
 
     this.setState({ showLaunchpad: target });
   };
+  openApp = (id) => {
+    // add it to the shown app list
+    let showApps = this.state.showApps;
+    showApps[id] = true;
+
+    // move to the top (use a maximum z-index)
+    let appsZ = this.state.appsZ;
+    let maxZ = this.state.maxZ + 1;
+    appsZ[id] = maxZ;
+
+    this.setState({
+      showApps: showApps,
+      appsZ: appsZ,
+      maxZ: maxZ,
+      currentTitle: apps.find((app) => {
+        return app.id === id;
+      }).title
+    });
+
+    let minApps = this.state.minApps;
+    // if the app has already been shown but minimized
+    if (minApps[id]) {
+      // move to window's last position
+      var r = document.querySelector(`#window-${id}`);
+      r.style.transform = `translate(${r.style.getPropertyValue(
+        "--window-transform-x"
+      )}, ${r.style.getPropertyValue("--window-transform-y")}) scale(1)`;
+      r.style.transition = "ease-in 0.3s";
+      // remove it from the minimized app list
+      minApps[id] = false;
+      this.setState({ minApps });
+    }
+  };
 
   render() {
     const { dark, brightness, setStateMac } = this.props;
@@ -107,6 +141,15 @@ class Desktop extends Component {
 
         {/* app发射台 */}
         <Launchpad show={showLaunchpad} />
+
+        {/* 底部app导航栏 */}
+        <Dock
+          open={this.openApp}
+          showApps={this.state.showApps}
+          showLaunchpad={this.state.showLaunchpad}
+          toggleLaunchpad={this.toggleLaunchpad}
+          hide={this.state.hideDock}
+        />
       </div>
     );
   }
