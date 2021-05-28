@@ -1,22 +1,16 @@
 import React, { useRef, useEffect } from "react";
 import { MenuItem, MenuItemGroup } from "./base";
 
-export default function AppleMenu({ setStateMac, toggleMenu, btnRef }) {
+export default function AppleMenu({ setStateMac, toggleMenu }) {
   const ref = useRef(null);
-
   useEffect(() => {
     function handleClickOutside(e) {
-      if (
-        ref.current &&
-        !ref.current.contains(e.target) &&
-        !btnRef.current.contains(e.target)
-      ) {
-        toggleMenu(false);
-      }
+      if (ref.current.contains(e.target)) return;
+      toggleMenu(false);
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [ref, toggleMenu, btnRef]);
+  }, [ref, toggleMenu]);
 
   return (
     <div

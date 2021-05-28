@@ -8,7 +8,8 @@ export const type = {
   TOGGLE_WIFI: "TOGGLE_WIFI",
   TOGGLE_BLUETOOTH: "TOGGLE_BLUETOOTH",
   TOGGLE_AIRDROP: "TOGGLE_AIRDROP",
-  TOGGLE_FULLSCREEN: "TOGGLE_FULLSCREEN"
+  TOGGLE_FULLSCREEN: "TOGGLE_FULLSCREEN",
+  TOGGLE_BATTERY: "TOGGLE_BATTERY"
 };
 
 export const toggleDark = (dark) => {
@@ -59,5 +60,15 @@ export const toggleAirdrop = (airdrop) => {
   return {
     type: type.TOGGLE_AIRDROP,
     airdrop
+  };
+};
+
+export const setBattery = (value) => {
+  return {
+    type: type.TOGGLE_BATTERY,
+    content: {
+      charging: value.charging,
+      battery: parseInt(value.level * 100)
+    }
   };
 };
