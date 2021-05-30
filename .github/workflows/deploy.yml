@@ -31,12 +31,12 @@ jobs:
     - name: build
       run: yarn run build
     - name: deploy to laliyun
-      uses: easingthemes/ssh-deploy@v2.1.1
+      uses: easingthemes/ssh-deploy@main
       env:
         SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
         ARGS: "-avzr --delete"
         SOURCE: "build"
-        REMOTE_HOST: "47.100.176.30"
+        REMOTE_HOST: "guojianbo.top"
         REMOTE_USER: "root"
-        TARGET: "/root/github-action/simulator-macos"
+        TARGET: "/root/github-actions/simulator-macos"
         

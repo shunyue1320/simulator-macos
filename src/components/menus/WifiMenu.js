@@ -23,7 +23,7 @@ class WifiMenu extends Component {
   }
 
   render() {
-    const { toggleWIFI, dark, wifi } = this.props;
+    const { toggleWIFI, wifi } = this.props;
     return (
       <div
         className="fixed h-10 w-80 max-w-full top-8 right-0 sm:right-2 px-2 py-0.5 flex gap-2 bg-gray-200 bg-opacity-90 blur rounded-lg text-black shadow-2xl"
