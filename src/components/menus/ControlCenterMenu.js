@@ -12,7 +12,7 @@ import {
 } from "../../redux/action";
 import music from "../../configs/music";
 
-import { FiBluetooth, FiRss } from "react-icons/fi";
+import { FiBluetooth } from "react-icons/fi";
 import {
   BsBrightnessAltHigh,
   BsPlayFill,

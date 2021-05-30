@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import _, { set } from "lodash";
+import _ from "lodash";
 import "./styles/index.css";
 import "./styles/index.tailwind.css";
 import { Provider } from "react-redux";
