@@ -5,9 +5,9 @@ name: Build and deploy
 
 on:
   push:
-    branches: master
+    branches: [ main ]
   pull_request:
-    branches: master
+    branches: [ main ]
 
 jobs:
   build-deploy:
@@ -20,17 +20,18 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
     - name: Use Node.js 14
       uses: actions/setup-node@v2
       with:
         node-version: '14'
     - name: yarn install
-    - run: yarn install
-    - name: yarn build
-    - run: yarn run build
+      run: yarn install
+    - name: build
+      run: yarn run build
     - name: deploy to laliyun
-    - uses: easingthemes/ssh-deploy@v2.1.1
+      uses: easingthemes/ssh-deploy@v2.1.1
       env:
         SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
         ARGS: "-avzr --delete"
