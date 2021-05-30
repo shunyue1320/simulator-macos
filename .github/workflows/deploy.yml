@@ -25,7 +25,9 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '14'
+    - name: yarn install
     - run: yarn install
+    - name: yarn build
     - run: yarn run build
     - name: deploy to laliyun
     - uses: easingthemes/ssh-deploy@v2.1.1
