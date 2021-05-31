@@ -1,4 +1,5 @@
 import React, { Component, createRef } from "react";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import Slider from "react-rangeslider";
 import "react-rangeslider/lib/index.css";
@@ -41,6 +42,28 @@ const SliderComponent = ({ icon, value, setValue }) => {
   );
 };
 
+@connect(
+  ({ dark, wifi, brightness, bluetooth, airdrop, fullscreen, volume }) => ({
+    dark,
+    wifi,
+    brightness,
+    bluetooth,
+    airdrop,
+    fullscreen,
+    volume
+  }),
+  (dispatch) =>
+    bindActionCreators(
+      {
+        toggleDark,
+        toggleWIFI,
+        toggleAirdrop,
+        toggleBleutooth,
+        toggleFullScreen
+      },
+      dispatch
+    )
+)
 class ControlCenterMenu extends Component {
   constructor(props) {
     super(props);
@@ -190,16 +213,4 @@ class ControlCenterMenu extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const { dark, wifi, brightness, bluetooth, airdrop, fullscreen, volume } =
-    state;
-  return { dark, wifi, brightness, bluetooth, airdrop, fullscreen, volume };
-};
-
-export default connect(mapStateToProps, {
-  toggleDark,
-  toggleWIFI,
-  toggleAirdrop,
-  toggleBleutooth,
-  toggleFullScreen
-})(ControlCenterMenu);
+export default ControlCenterMenu;

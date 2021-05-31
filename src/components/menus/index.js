@@ -1,17 +1,18 @@
 import React, { Component, createRef, forwardRef } from "react";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import format from "date-fns/format";
 
 import AppleMenu from "./AppleMenu";
 import WifiMenu from "./WifiMenu";
 import ControlCenterMenu from "./ControlCenterMenu";
-import { isFullScreen } from "../../utils/screen";
 import {
-  setVolume,
-  setBrightness,
   toggleFullScreen,
-  setBattery
+  setBrightness,
+  setBattery,
+  setVolume
 } from "../../redux/action";
+import { isFullScreen } from "../../utils/screen";
 import music from "../../configs/music";
 
 import {
@@ -41,6 +42,20 @@ const TopBarItem = forwardRef((props, ref) => {
 });
 TopBarItem.displayName = "TopBarItem";
 
+@connect(
+  ({ volume, brightness, wifi, charging, battery }) => ({
+    volume,
+    brightness,
+    wifi,
+    charging,
+    battery
+  }),
+  (dispatch) =>
+    bindActionCreators(
+      { toggleFullScreen, setBrightness, setBattery, setVolume },
+      dispatch
+    )
+)
 class TopBar extends Component {
   constructor(props) {
     super(props);
@@ -210,14 +225,4 @@ class TopBar extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const { volume, brightness, wifi, charging, battery } = state;
-  return { volume, brightness, wifi, charging, battery };
-};
-
-export default connect(mapStateToProps, {
-  toggleFullScreen,
-  setBrightness,
-  setBattery,
-  setVolume
-})(TopBar);
+export default TopBar;

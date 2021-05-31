@@ -1,8 +1,13 @@
 import React, { Component, createRef } from "react";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import "react-rangeslider/lib/index.css";
 import { toggleWIFI } from "../../redux/action";
 
+@connect(
+  ({ dark, wifi }) => ({ dark, wifi }),
+  (dispatch) => bindActionCreators({ toggleWIFI }, dispatch)
+)
 class WifiMenu extends Component {
   constructor(props) {
     super(props);
@@ -46,11 +51,4 @@ class WifiMenu extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const { dark, wifi } = state;
-  return { dark, wifi };
-};
-
-export default connect(mapStateToProps, {
-  toggleWIFI
-})(WifiMenu);
+export default WifiMenu;

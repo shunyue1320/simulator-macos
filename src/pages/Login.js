@@ -5,6 +5,7 @@ import { RiMoonFill, RiShutDownLine, RiRestartLine } from "react-icons/ri";
 import wallpapers from "../configs/wallpapers";
 import user from "../configs/user";
 
+@connect(({ dark }) => ({ dark }))
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -112,10 +113,4 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    dark: state.dark
-  };
-};
-
-export default connect(mapStateToProps, null)(Login);
+export default Login;
