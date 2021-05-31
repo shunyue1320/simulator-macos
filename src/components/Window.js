@@ -53,7 +53,7 @@ export default class Window extends Component {
       width,
       height,
       x: (maxW - width) / 2,
-      y: (maxH - height) / 4
+      y: (maxH - height) / 6
     };
     this.resize.bind(this);
   }
@@ -91,8 +91,8 @@ export default class Window extends Component {
       : "border border-gray-500 border-opacity-30";
     const width = this.props.max ? this.state.maxW : this.state.width;
     const height = this.props.max ? this.state.maxH : this.state.height;
-    const minWidth = this.props.minWidth ?? 200;
-    const minHeight = this.props.minHeight ?? 200;
+    const minWidth = this.props.minWidth ?? 300;
+    const minHeight = this.props.minHeight ?? 300;
     const position = {
       x: this.props.max
         ? 0
@@ -114,30 +114,27 @@ export default class Window extends Component {
       <Rnd
         id={`window-${this.props.id}`}
         size={{ width, height }}
-        minWidth={minWidth}
-        minHeight={minHeight}
         position={position}
-        onDragStop={(e, position) => {
-          this.setState({
-            x: position.x,
-            y: position.y
-          });
+        onDragStop={(e, d) => {
+          this.setState({ x: d.x, y: d.y });
         }}
         onResizeStop={(e, direction, ref, delta, position) => {
           this.setState({
-            width: parseInt(ref.style.width),
-            height: parseInt(ref.style.height),
+            width: ref.style.width,
+            height: ref.style.height,
             ...position
           });
         }}
-        dragHandleClassName="window-drag"
+        onMouseDown={() => this.props.focus(this.props.id)}
+        minWidth={minWidth}
+        minHeight={minHeight}
         disableDragging={this.props.max}
         style={{ zIndex: this.props.z }}
-        onMouseDown={() => this.props.focus(this.props.id)}
+        dragHandleClassName="window-drag"
         className={`absolute ${round} overflow-hidden bg-transparent w-full h-full ${border} shadow-md ${minimized}`}
       >
         <div
-          className="window-drag relative h-6 text-center bg-gray-300"
+          className="window-drag relative h-6 text-center bg-gray-200"
           onDoubleClick={() => this.props.setMax(this.props.id)}
         >
           <TrafficLights
