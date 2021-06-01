@@ -135,6 +135,7 @@ class NoInternetPage extends Component {
   }
 }
 
+@connect(({ dark, wifi }) => ({ dark, wifi }))
 class Safari extends Component {
   constructor(props) {
     super(props);
@@ -237,11 +238,4 @@ class Safari extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    dark: state.dark,
-    wifi: state.wifi
-  };
-};
-
-export default connect(mapStateToProps, null)(Safari);
+export default Safari;

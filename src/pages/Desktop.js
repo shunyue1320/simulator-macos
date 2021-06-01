@@ -10,6 +10,7 @@ import Launchpad from "../components/Launchpad";
 import Dock from "../components/dock/Dock";
 import Window from "../components/Window";
 
+@connect(({ dark, brightness }) => ({ dark, brightness }))
 class Desktop extends Component {
   constructor(props) {
     super(props);
@@ -248,11 +249,4 @@ class Desktop extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    dark: state.dark,
-    brightness: state.brightness
-  };
-};
-
-export default connect(mapStateToProps, null)(Desktop);
+export default Desktop;

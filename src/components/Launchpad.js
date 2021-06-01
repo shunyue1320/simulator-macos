@@ -4,6 +4,7 @@ import { BiSearch } from "react-icons/bi";
 import launchpadApps from "../configs/launchpad";
 import wallpapers from "../configs/wallpapers";
 
+@connect(({ dark }) => ({ dark }))
 class Launchpad extends Component {
   constructor(props) {
     super(props);
@@ -89,9 +90,4 @@ class Launchpad extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const { dark } = state;
-  return { dark };
-};
-
-export default connect(mapStateToProps, null)(Launchpad);
+export default Launchpad;

@@ -59,11 +59,13 @@
     ]
   },
   "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.14.2",
     "@craco/craco": "^6.1.2",
     "@rooks/use-raf": "^4.11.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "craco-less": "^1.17.1",
     "date-fns": "^2.21.3",
     "framer-motion": "^4.1.17",
     "lodash": "^4.17.21",
@@ -73,9 +75,10 @@
     "react-icons": "^4.2.0",
     "react-rangeslider": "^2.2.0",
     "react-redux": "^7.2.4",
-    "react-rnd": "^10.3.0",
+    "react-rnd": "^10.3.1",
     "react-scripts": "4.0.3",
     "react-webcam": "5.2.2",
+    "redux": "^4.1.0",
     "web-vitals": "^1.0.1"
   },
   "devDependencies": {

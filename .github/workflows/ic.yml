@@ -1,0 +1,21 @@
+name: Continuous Integration
+on: [ pull_request ]
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Use Node.js 12
+        uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+      - name: yarn install
+        run: yarn install --frozen-lockfile
+      - name: lint
+        run: |
+          export DISPLAY=:99
+          Xvfb -ac :99 -screen 0 1280x1024x24 >/dev/null 2>&1 &
+          yarn run lint
+        
