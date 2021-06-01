@@ -120,8 +120,8 @@ export default class Window extends Component {
         }}
         onResizeStop={(e, direction, ref, delta, position) => {
           this.setState({
-            width: ref.style.width,
-            height: ref.style.height,
+            width: parseInt(ref.style.width),
+            height: parseInt(ref.style.height),
             ...position
           });
         }}
