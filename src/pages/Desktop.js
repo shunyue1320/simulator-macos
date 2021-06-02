@@ -95,11 +95,15 @@ class Desktop extends Component {
     // if the app has already been shown but minimized
     if (minApps[id]) {
       // move to window's last position
-      var r = document.querySelector(`#window-${id}`);
+      let r = document.querySelector(`#window-${id}`);
       r.style.transform = `translate(${r.style.getPropertyValue(
         "--window-transform-x"
       )}, ${r.style.getPropertyValue("--window-transform-y")}) scale(1)`;
       r.style.transition = "ease-in 0.3s";
+      let timer = setTimeout(() => {
+        clearTimeout(timer);
+        r.style.transition = "none";
+      }, 300);
       // remove it from the minimized app list
       minApps[id] = false;
       this.setState({ minApps });

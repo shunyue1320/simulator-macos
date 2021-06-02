@@ -9684,10 +9684,10 @@ react-refresh@^0.8.3:
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.8.3.tgz#721d4657672d400c5e3c75d063c4a85fb2d5d68f"
   integrity sha512-X8jZHc7nCMjaCqoU+V2I0cOhNW+QMBwSUkeXnTi8IPe6zaRWfn60ZzvFDZqWPfmSJfjub7dDW1SP0jaHWLu/hg==
 
-react-rnd@^10.3.1:
-  version "10.3.1"
-  resolved "https://registry.yarnpkg.com/react-rnd/-/react-rnd-10.3.1.tgz#ed8fb1964beae1e4851af097b3963630e5e02b2e"
-  integrity sha512-OmQ914RHiWrRCqrjaUtKTuaFgQAYl8iDjoyF1N63DBSWY6BFMqbBlGJBlWCmndKatfKZC/GStjBckk95HsahOA==
+react-rnd@^10.3.2:
+  version "10.3.2"
+  resolved "https://registry.yarnpkg.com/react-rnd/-/react-rnd-10.3.2.tgz#2c227c27b5532b2cdff83f206f8d1838f93f924e"
+  integrity sha512-APIaMEi8+r5W2bQ5MBDm7iKp+wRjmZ7jcmyFu+yJ7y7h/ZYPaXr9nYz2PF6TpijxXwpCVU1/2Zlp75beaihs+Q==
   dependencies:
     re-resizable "6.9.0"
     react-draggable "4.4.3"
