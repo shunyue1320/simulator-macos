@@ -228,7 +228,7 @@ class Desktop extends Component {
         {/* 打开的应用窗口 */}
         {this.renderAppWindows()}
 
-        {/* 搜索弹窗 */}
+        {/* 全局搜索输入框 */}
         {spotlight && (
           <Spotlight
             openApp={this.openApp}
@@ -237,7 +237,7 @@ class Desktop extends Component {
           />
         )}
 
-        {/* app发射台 */}
+        {/* 小火箭app搜索弹窗 */}
         <Launchpad show={showLaunchpad} />
 
         {/* 底部app导航栏 */}
