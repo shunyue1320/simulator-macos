@@ -238,7 +238,10 @@ class Desktop extends Component {
         )}
 
         {/* 小火箭app搜索弹窗 */}
-        <Launchpad show={showLaunchpad} />
+        <Launchpad
+          show={showLaunchpad}
+          toggleLaunchpad={this.toggleLaunchpad}
+        />
 
         {/* 底部app导航栏 */}
         <Dock
