@@ -40,6 +40,7 @@ class Launchpad extends Component {
           zIndex: 99998,
           backgroundImage: `url(${dark ? wallpapers.night : wallpapers.day})`
         }}
+        onClick={() => this.props.toggleLaunchpad(false)}
       >
         <div className="w-full h-full absolute bg-gray-900 bg-opacity-20 blur">
           <div className="block mx-auto grid grid-cols-11 h-7 w-64 mt-5 rounded-md bg-gray-200 bg-opacity-10 border border-gray-200 border-opacity-30">
