@@ -74,17 +74,14 @@ function HowDare({ setRMRF }) {
       ctx.fillRect(0, 0, _canvas.width, _canvas.height);
 
       ctx.fillStyle = "#2e9244";
-      ctx.font = `${this.font_size}px arial`;
+      ctx.font = `${font_size}px arial`;
 
       for (let i = 0; i < drops.length; i++) {
         const text = characters[Math.floor(Math.random() * characters.length)];
-        ctx.fillText(text, i * this.font_size, drops[i] * this.font_size);
+        ctx.fillText(text, i * font_size, drops[i] * font_size);
         // sends the drop back to the top randomly after it has crossed the screen
         // adding randomness to the reset to make the drops scattered on the Y axis
-        if (
-          drops[i] * this.font_size > _canvas.height &&
-          Math.random() > 0.975
-        ) {
+        if (drops[i] * font_size > _canvas.height && Math.random() > 0.975) {
           drops[i] = 0;
         }
         drops[i]++;
